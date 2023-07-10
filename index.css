@@ -78,7 +78,7 @@ td {
 .actionWrap {
   flex-wrap: nowrap;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   width: 60%;
   margin: auto auto;
   background-color: #198754;
@@ -89,19 +89,29 @@ td {
   padding: 10px;
   color: #fff;
 }
-.formWrap {
-  /* background-color: #939597; */
-  width: 100%;
+/* .formWrap {
+  width: 90%;
   box-sizing: content-box;
   margin-top: 10px;
-}
-.formWrap form {
-  width: 80%;
-  /* background-color: #939597; */
   margin: auto auto;
-}
-.formWrap select {
+} */
+
+.form select {
   text-align: center;
+  line-height: 50px;
+  font-size: 16px;
+}
+
+.form {
+  margin: auto auto;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-evenly;
+}
+.form button input {
+  line-height: 30px;
+  font-size: 16px;
 }
 .tablesWrap {
   flex-direction: column;

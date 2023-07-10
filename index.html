@@ -12,15 +12,15 @@
     <link rel="stylesheet" href="./index.css" />
     <title>My Balance</title>
   </head>
-  <body>
+  <body class="container-md">
     <div class="appContainer">
       <div class="headerWrap">
         <h1 id="header" class="headHeader"></h1>
         <h1 id="balance">0</h1>
-        <div class="col-6" style="text-align: center">
+        <div class="container-lg" style="text-align: center">
           <div class="actionWrap" id="incomesRef">
-            <h4 class="col-6">Incomes :</h4>
-            <h4 class="col-6" id="incomes">0</h4>
+            <h4 class="col-6 col-sm-5">Incomes :</h4>
+            <h4 class="col-6 col-sm-5" id="incomes">0</h4>
           </div>
           <div
             id="expensesRef"
@@ -32,9 +32,9 @@
           </div>
         </div>
       </div>
-      <div class="formWrap">
-        <form id="form">
-          <select id="select" class="col-1 m-1">
+      <div class="container-md">
+        <form id="form" class="row form">
+          <select id="select" class="col-1 col-sm-1">
             <option value="+" selected>+</option>
             <option value="-">-</option>
           </select>
@@ -42,15 +42,15 @@
             id="desc"
             type="text"
             placeholder="Add Description"
-            class="col-6 m-1"
+            class="col-4 col-sm-4"
           />
           <input
             id="amount"
             type="number"
-            class="col-2 m-1"
+            class="col-4 col-sm-4"
             placeholder="Ammount"
           />
-          <button class="col-1 m-1" id="addBtn" type="button">Add</button>
+          <button class="col-2 col-sm-2" id="addBtn" type="button">Add</button>
         </form>
       </div>
       <div class="imageBg">
