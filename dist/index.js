@@ -116,6 +116,7 @@ function createTransaction() {
     transaction.description = DOM.transactionDescRef.value;
     const condition = !transaction.ammount || !transaction.type || !transaction.description;
     if (condition) {
+        console.log(condition);
         return alert(`Please Fill All Fields`);
     }
     transaction.id = `${transaction.description}${transaction.ammount}`;

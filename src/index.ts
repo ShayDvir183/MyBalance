@@ -133,6 +133,7 @@ function createTransaction(): void {
   const condition: boolean =
     !transaction.ammount || !transaction.type || !transaction.description;
   if (condition) {
+    console.log(condition);
     return alert(`Please Fill All Fields`);
   }
   transaction.id = `${transaction.description}${transaction.ammount}`;
@@ -273,7 +274,7 @@ function deleteTransaction(element: ITransaction, type: string) {
   }
   return;
 }
-function doMinusStuff(transaction) {
+function doMinusStuff(transaction: ITransaction) {
   state.expenseTransactions.push(transaction);
   state.expenses -= transaction.ammount;
   DOM.expensesRowNumber.textContent = "";

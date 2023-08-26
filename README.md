@@ -17,4 +17,5 @@
 </ol>
 
 <h2 >Demo</h2>
-<a href="https://mybalance.onrender.com/">Click Me</a>
+<a  target="_blank"
+        rel="noreferrer" href="https://mybalance.onrender.com/">Click Me</a>

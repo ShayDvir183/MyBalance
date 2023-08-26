@@ -89,12 +89,6 @@ td {
   padding: 10px;
   color: #fff;
 }
-/* .formWrap {
-  width: 90%;
-  box-sizing: content-box;
-  margin-top: 10px;
-  margin: auto auto;
-} */
 
 .form select {
   text-align: center;
@@ -127,11 +121,21 @@ td {
 }
 .tableWrap {
   width: 100%;
-  margin: auto auto;
 }
 #expensesHeader {
   color: #dc3545;
   margin-bottom: 10px;
   width: 100%;
   margin-top: 10px;
+}
+
+@media screen and (max-width: 992px) {
+  .actionWrap {
+    width: 70%;
+  }
+  .form select {
+    text-align: center;
+    line-height: 50px;
+    font-size: 16px;
+  }
 }
