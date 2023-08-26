@@ -67,6 +67,8 @@ function makeItGreenOrRed(): void {
       break;
   }
 }
+const mediaScreen = window.matchMedia("(max-width: 992px)");
+console.log(mediaScreen);
 function init(): void {
   const months: Array<string> = [
     "January",
@@ -173,8 +175,12 @@ function drawTable(transactions: Array<ITransaction>, type: string) {
     const ammountTd = <HTMLTableCellElement>document.createElement("td");
     const percentageSpan = <HTMLSpanElement>document.createElement("span");
     percentageSpan.id = element.id;
-    const deleteBtn: HTMLButtonElement = createDeleteBtn(element, type);
-    tRow.addEventListener("mouseover", (e: MouseEvent) => {
+    const deleteBtn: HTMLButtonElement = createDeleteBtn(
+      element,
+      type,
+      mediaScreen.matches
+    );
+    if (mediaScreen.matches) {
       if (type === "-") {
         tRow.classList.add("red");
         ammountTd.style.color = "#fff";
@@ -186,20 +192,35 @@ function drawTable(transactions: Array<ITransaction>, type: string) {
       }
       deleteBtn.classList.remove("invisible");
       deleteBtn.classList.add("visible");
-    });
-    tRow.addEventListener("mouseleave", (e: MouseEvent) => {
-      if (type === "-") {
-        tRow.classList.add("red");
-        ammountTd.style.color = "#dc3545";
-        descTd.style.color = "#dc3545";
-      } else {
-        tRow.classList.add("green");
-        ammountTd.style.color = greenColor;
-        descTd.style.color = greenColor;
-      }
-      deleteBtn.classList.remove("visible");
-      deleteBtn.classList.add("invisible");
-    });
+    } else {
+      tRow.addEventListener("mouseover", (e: MouseEvent) => {
+        if (type === "-") {
+          tRow.classList.add("red");
+          ammountTd.style.color = "#fff";
+          descTd.style.color = "#fff";
+        } else {
+          tRow.classList.add("green");
+          ammountTd.style.color = "#fff";
+          descTd.style.color = "#fff";
+        }
+        deleteBtn.classList.remove("invisible");
+        deleteBtn.classList.add("visible");
+      });
+      tRow.addEventListener("mouseleave", (e: MouseEvent) => {
+        if (type === "-") {
+          tRow.classList.add("red");
+          ammountTd.style.color = "#dc3545";
+          descTd.style.color = "#dc3545";
+        } else {
+          tRow.classList.add("green");
+          ammountTd.style.color = greenColor;
+          descTd.style.color = greenColor;
+        }
+        deleteBtn.style.border = "none";
+        deleteBtn.classList.remove("visible btn-success btn-danger");
+        deleteBtn.classList.add("invisible");
+      });
+    }
     descTd.innerHTML = element.description;
     percentageSpan.classList.add(
       "badge",
@@ -332,16 +353,25 @@ function doPlusStuff(transaction: ITransaction) {
   drawTable(state.expenseTransactions, "-");
   DOM.formRef.reset();
 }
-function createDeleteBtn(element: ITransaction, type: string) {
+function createDeleteBtn(
+  element: ITransaction,
+  type: string,
+  isMobile: boolean
+) {
   const deleteBtn: HTMLButtonElement = document.createElement("button");
   deleteBtn.textContent = "X";
   if (type === `-`) {
-    deleteBtn.classList.add("btn", "btn-danger", "invisible");
-    deleteBtn.style.backgroundColor = "#dc3545";
+    if (!isMobile) {
+      deleteBtn.classList.add("btn-danger", "invisible");
+      deleteBtn.style.backgroundColor = "#dc3545";
+    }
   } else if (type === `+`) {
-    deleteBtn.style.backgroundColor = greenColor;
-    deleteBtn.classList.add("btn", "btn-success", "invisible");
+    if (!isMobile) {
+      deleteBtn.style.backgroundColor = greenColor;
+      deleteBtn.classList.add("btn-success", "invisible");
+    }
   }
+  deleteBtn.classList.add("btn");
   deleteBtn.addEventListener("click", (e: MouseEvent) => {
     deleteTransaction(element, type);
   });

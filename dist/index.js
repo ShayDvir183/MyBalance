@@ -58,6 +58,8 @@ function makeItGreenOrRed() {
             break;
     }
 }
+const mediaScreen = window.matchMedia("(max-width: 992px)");
+console.log(mediaScreen);
 function init() {
     const months = [
         "January",
@@ -155,8 +157,8 @@ function drawTable(transactions, type) {
         const ammountTd = document.createElement("td");
         const percentageSpan = document.createElement("span");
         percentageSpan.id = element.id;
-        const deleteBtn = createDeleteBtn(element, type);
-        tRow.addEventListener("mouseover", (e) => {
+        const deleteBtn = createDeleteBtn(element, type, mediaScreen.matches);
+        if (mediaScreen.matches) {
             if (type === "-") {
                 tRow.classList.add("red");
                 ammountTd.style.color = "#fff";
@@ -169,21 +171,38 @@ function drawTable(transactions, type) {
             }
             deleteBtn.classList.remove("invisible");
             deleteBtn.classList.add("visible");
-        });
-        tRow.addEventListener("mouseleave", (e) => {
-            if (type === "-") {
-                tRow.classList.add("red");
-                ammountTd.style.color = "#dc3545";
-                descTd.style.color = "#dc3545";
-            }
-            else {
-                tRow.classList.add("green");
-                ammountTd.style.color = greenColor;
-                descTd.style.color = greenColor;
-            }
-            deleteBtn.classList.remove("visible");
-            deleteBtn.classList.add("invisible");
-        });
+        }
+        else {
+            tRow.addEventListener("mouseover", (e) => {
+                if (type === "-") {
+                    tRow.classList.add("red");
+                    ammountTd.style.color = "#fff";
+                    descTd.style.color = "#fff";
+                }
+                else {
+                    tRow.classList.add("green");
+                    ammountTd.style.color = "#fff";
+                    descTd.style.color = "#fff";
+                }
+                deleteBtn.classList.remove("invisible");
+                deleteBtn.classList.add("visible");
+            });
+            tRow.addEventListener("mouseleave", (e) => {
+                if (type === "-") {
+                    tRow.classList.add("red");
+                    ammountTd.style.color = "#dc3545";
+                    descTd.style.color = "#dc3545";
+                }
+                else {
+                    tRow.classList.add("green");
+                    ammountTd.style.color = greenColor;
+                    descTd.style.color = greenColor;
+                }
+                deleteBtn.style.border = "none";
+                deleteBtn.classList.remove("visible btn-success btn-danger");
+                deleteBtn.classList.add("invisible");
+            });
+        }
         descTd.innerHTML = element.description;
         percentageSpan.classList.add("badge", "rounded-pill", "bg-light", "text-dark");
         percentageSpan.style.fontSize = "small";
@@ -305,17 +324,22 @@ function doPlusStuff(transaction) {
     drawTable(state.expenseTransactions, "-");
     DOM.formRef.reset();
 }
-function createDeleteBtn(element, type) {
+function createDeleteBtn(element, type, isMobile) {
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "X";
     if (type === `-`) {
-        deleteBtn.classList.add("btn", "btn-danger", "invisible");
-        deleteBtn.style.backgroundColor = "#dc3545";
+        if (!isMobile) {
+            deleteBtn.classList.add("btn-danger", "invisible");
+            deleteBtn.style.backgroundColor = "#dc3545";
+        }
     }
     else if (type === `+`) {
-        deleteBtn.style.backgroundColor = greenColor;
-        deleteBtn.classList.add("btn", "btn-success", "invisible");
+        if (!isMobile) {
+            deleteBtn.style.backgroundColor = greenColor;
+            deleteBtn.classList.add("btn-success", "invisible");
+        }
     }
+    deleteBtn.classList.add("btn");
     deleteBtn.addEventListener("click", (e) => {
         deleteTransaction(element, type);
     });
