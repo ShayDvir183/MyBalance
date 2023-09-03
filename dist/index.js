@@ -59,7 +59,6 @@ function makeItGreenOrRed() {
     }
 }
 const mediaScreen = window.matchMedia("(max-width: 992px)");
-console.log(mediaScreen);
 function init() {
     const months = [
         "January",

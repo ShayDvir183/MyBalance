@@ -68,7 +68,6 @@ function makeItGreenOrRed(): void {
   }
 }
 const mediaScreen = window.matchMedia("(max-width: 992px)");
-console.log(mediaScreen);
 function init(): void {
   const months: Array<string> = [
     "January",
