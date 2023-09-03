@@ -160,13 +160,13 @@ function drawTable(transactions, type) {
         if (mediaScreen.matches) {
             if (type === "-") {
                 tRow.classList.add("red");
-                ammountTd.style.color = "#fff";
-                descTd.style.color = "#fff";
+                ammountTd.style.color = redColor;
+                descTd.style.color = redColor;
             }
             else {
                 tRow.classList.add("green");
-                ammountTd.style.color = "#fff";
-                descTd.style.color = "#fff";
+                ammountTd.style.color = greenColor;
+                descTd.style.color = greenColor;
             }
             deleteBtn.classList.remove("invisible");
             deleteBtn.classList.add("visible");
