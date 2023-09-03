@@ -53,9 +53,9 @@ function makeItGreenOrRed(): void {
       DOM.transactionDescRef.classList.remove("plus");
       DOM.transactionTypeRef.classList.remove("plus");
       DOM.addBtnRef.classList.remove("btn-success");
-      DOM.transactionAmountRef.style.color = "#dc3545";
-      DOM.transactionDescRef.style.color = "#dc3545";
-      DOM.transactionTypeRef.style.color = "#dc3545";
+      DOM.transactionAmountRef.style.color = redColor;
+      DOM.transactionDescRef.style.color = redColor;
+      DOM.transactionTypeRef.style.color = redColor;
       DOM.addBtnRef.style.color = "#fff";
       DOM.transactionAmountRef.classList.add("minus");
       DOM.transactionDescRef.classList.add("minus");
@@ -195,12 +195,12 @@ function drawTable(transactions: Array<ITransaction>, type: string) {
       tRow.addEventListener("mouseover", (e: MouseEvent) => {
         if (type === "-") {
           tRow.classList.add("red");
-          ammountTd.style.color = "#fff";
-          descTd.style.color = "#fff";
+          ammountTd.style.color = redColor;
+          descTd.style.color = redColor;
         } else {
           tRow.classList.add("green");
-          ammountTd.style.color = "#fff";
-          descTd.style.color = "#fff";
+          ammountTd.style.color = greenColor;
+          descTd.style.color = greenColor;
         }
         deleteBtn.classList.remove("invisible");
         deleteBtn.classList.add("visible");
@@ -208,8 +208,8 @@ function drawTable(transactions: Array<ITransaction>, type: string) {
       tRow.addEventListener("mouseleave", (e: MouseEvent) => {
         if (type === "-") {
           tRow.classList.add("red");
-          ammountTd.style.color = "#dc3545";
-          descTd.style.color = "#dc3545";
+          ammountTd.style.color = redColor;
+          descTd.style.color = redColor;
         } else {
           tRow.classList.add("green");
           ammountTd.style.color = greenColor;
@@ -362,7 +362,7 @@ function createDeleteBtn(
   if (type === `-`) {
     if (!isMobile) {
       deleteBtn.classList.add("btn-danger", "invisible");
-      deleteBtn.style.backgroundColor = "#dc3545";
+      deleteBtn.style.backgroundColor = redColor;
     }
   } else if (type === `+`) {
     if (!isMobile) {
